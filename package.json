@@ -22,7 +22,11 @@
     "migration:generate": "npm run build && npm run typeorm -- migration:generate",
     "migration:run": "npm run typeorm -- migration:run",
     "migration:revert": "npm run typeorm -- migration:revert",
-    "migration:show": "npm run typeorm -- migration:show"
+    "migration:show": "npm run typeorm -- migration:show",
+    "db:create": "ts-node ./node_modules/typeorm-extension/bin/cli.cjs -d data-source.config.ts db:create",
+    "db:drop": "ts-node ./node_modules/typeorm-extension/bin/cli.cjs -d data-source.config.ts db:drop",
+    "seed:run": "ts-node ./node_modules/typeorm-extension/bin/cli.cjs -d data-source.config.ts seed:run",
+    "seed:create": "ts-node ./node_modules/typeorm-extension/bin/cli.cjs -d data-source.config.ts seed:create"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
@@ -31,11 +35,14 @@
     "@nestjs/mapped-types": "*",
     "@nestjs/platform-express": "^11.0.1",
     "@nestjs/typeorm": "^11.0.0",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.3",
     "dotenv": "^17.2.3",
     "pg": "^8.16.3",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",
-    "typeorm": "^0.3.28"
+    "typeorm": "^0.3.28",
+    "typeorm-extension": "^3.7.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",

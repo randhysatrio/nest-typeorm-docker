@@ -1,0 +1,33 @@
+# Node
+node_modules
+npm-debug.log
+yarn-error.log
+pnpm-debug.log
+
+# Build output
+dist
+build
+
+# VCS
+.git
+.gitignore
+
+# OS / Editor
+.DS_Store
+.vscode
+.idea
+
+# Docker files (optional)
+docker-compose.yml
+Dockerfile
+
+# Tests & coverage
+coverage
+*.spec.ts
+
+# Logs
+logs
+*.log
+
+.dockerignore
+.prettierrc 
