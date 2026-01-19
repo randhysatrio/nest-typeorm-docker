@@ -33,7 +33,7 @@ services:
       nest-typeorm-postgres:
         condition: service_healthy
     ports:
-      - '7000:3000'
+      - '7001:3000'
     volumes:
       - .:/app
       - /app/node_modules
