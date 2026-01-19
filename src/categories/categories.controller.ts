@@ -11,6 +11,7 @@ import {
   ParseIntPipe,
   ParseBoolPipe,
   Put,
+  HttpCode,
 } from '@nestjs/common';
 
 import { CategoriesService } from './categories.service';
@@ -25,6 +26,7 @@ export class CategoriesController {
   constructor(private readonly categoriesService: CategoriesService) {}
 
   @Post()
+  @HttpCode(HttpStatus.CREATED)
   async create(@Body() createCategoryDto: CreateCategoryDto) {
     const category = await this.categoriesService.create(createCategoryDto);
 

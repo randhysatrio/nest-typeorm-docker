@@ -61,8 +61,8 @@ export class CategoriesService {
   }
 
   async findOne(id: string) {
-    const category = await this.categoryRepository.findOne({
-      where: { id },
+    const category = await this.categoryRepository.findOneBy({
+      id,
     });
 
     if (!category) {
@@ -75,13 +75,13 @@ export class CategoriesService {
   }
 
   async update(id: string, updateCategoryDto: UpdateCategoryDto) {
-    const category = await this.categoryRepository.findOne({
-      where: { id },
+    const category = await this.categoryRepository.findOneBy({
+      id,
     });
 
     if (!category) {
       throw new BadRequestException(
-        createApiResponse(HttpStatus.NOT_FOUND, false, 'Category not found!'),
+        createApiResponse(HttpStatus.BAD_REQUEST, false, 'Category not found!'),
       );
     }
 
@@ -112,7 +112,7 @@ export class CategoriesService {
 
     if (!category) {
       throw new BadRequestException(
-        createApiResponse(HttpStatus.NOT_FOUND, false, 'Category not found!'),
+        createApiResponse(HttpStatus.BAD_REQUEST, false, 'Category not found!'),
       );
     }
     if (!category.deletedAt) {
@@ -129,13 +129,13 @@ export class CategoriesService {
   }
 
   async delete(id: string) {
-    const category = await this.categoryRepository.findOne({
-      where: { id },
+    const category = await this.categoryRepository.findOneBy({
+      id,
     });
 
     if (!category) {
       throw new BadRequestException(
-        createApiResponse(HttpStatus.NOT_FOUND, false, 'Category not found!'),
+        createApiResponse(HttpStatus.BAD_REQUEST, false, 'Category not found!'),
       );
     }
 
@@ -150,7 +150,16 @@ export class CategoriesService {
 
     if (!category) {
       throw new BadRequestException(
-        createApiResponse(HttpStatus.NOT_FOUND, false, 'Category not found!'),
+        createApiResponse(HttpStatus.BAD_REQUEST, false, 'Category not found!'),
+      );
+    }
+    if (!category.deletedAt) {
+      throw new BadRequestException(
+        createApiResponse(
+          HttpStatus.BAD_REQUEST,
+          false,
+          'Category must be deleted before destroyed!',
+        ),
       );
     }
 

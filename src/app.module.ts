@@ -9,12 +9,14 @@ import { AppService } from './app.service';
 import { AppDataSourceConfig } from '../data-source.config';
 
 import { CategoriesModule } from './categories/categories.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot(AppDataSourceConfig),
     CategoriesModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
