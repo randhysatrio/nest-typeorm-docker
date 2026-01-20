@@ -1,4 +1,25 @@
 services:
+  nest-typeorm-api:
+    container_name: nest-typeorm-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    environment:
+      CHOKIDAR_USEPOLLING: 'true'
+      WATCHPACK_POLLING: 'true'
+    depends_on:
+      nest-typeorm-postgres:
+        condition: service_healthy
+    ports:
+      - '7001:3000'
+    volumes:
+      - .:/app
+      - /app/node_modules
+    networks:
+      - nest-typeorm-network
+
   nest-typeorm-postgres:
     image: postgres:16
     container_name: nest-typeorm-postgres
@@ -18,28 +39,23 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+    networks:
+      - nest-typeorm-network
 
-  nest-typeorm-api:
-    container_name: nest-typeorm-api
-    build:
-      context: .
-      dockerfile: Dockerfile
-    env_file:
-      - .env
-    environment:
-      CHOKIDAR_USEPOLLING: 'true'
-      WATCHPACK_POLLING: 'true'
-    depends_on:
-      nest-typeorm-postgres:
-        condition: service_healthy
+  nest-typeorm-redis:
+    image: 'redis:latest'
+    restart: unless-stopped
+    container_name: nest-typeorm-redis
     ports:
-      - '7001:3000'
+      - '7379:6379'
     volumes:
-      - .:/app
-      - /app/node_modules
+      - nest-typeorm-redis-data:/data
+    networks:
+      - nest-typeorm-network
 
 volumes:
   nest-typeorm-data:
+  nest-typeorm-redis-data:
 
 networks:
   nest-typeorm-network:
