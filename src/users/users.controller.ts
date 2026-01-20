@@ -10,6 +10,7 @@ import {
   ParseBoolPipe,
   HttpStatus,
   HttpCode,
+  Query,
 } from '@nestjs/common';
 
 import { UsersService } from './users.service';
@@ -23,8 +24,8 @@ import { UpdateUserDto } from './dto/update-user.dto';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Post()
   @HttpCode(HttpStatus.CREATED)
+  @Post()
   async create(@Body() createUserDto: CreateUserDto) {
     const user = await this.usersService.create(createUserDto);
 
@@ -38,10 +39,10 @@ export class UsersController {
 
   @Get()
   async findAll(
-    @Param('page', ParseIntPipe) page: number,
-    @Param('size', ParseIntPipe) size: number,
-    @Param('keyword') keyword?: string,
-    @Param('hard', new ParseBoolPipe({ optional: true })) hard?: boolean,
+    @Query('page', ParseIntPipe) page: number,
+    @Query('size', ParseIntPipe) size: number,
+    @Query('keyword') keyword?: string,
+    @Query('hard', new ParseBoolPipe({ optional: true })) hard?: boolean,
   ) {
     const { data, meta } = await this.usersService.findAll(
       page,

@@ -60,6 +60,17 @@ export class UsersService {
       ...(hard && { withDeleted: true }),
       skip: offset,
       take: size,
+      select: [
+        'id',
+        'name',
+        'email',
+        'phone',
+        'picture',
+        'isVerified',
+        'createdAt',
+        'updatedAt',
+        'deletedAt',
+      ],
     });
     const meta = calculatePaginationMeta(count, page, size);
 
