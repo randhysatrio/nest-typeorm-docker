@@ -21,7 +21,7 @@ describe('OtpService', () => {
       del: jest.fn(),
     };
 
-    const module: TestingModule = await Test.createTestingModule({
+    const module = await Test.createTestingModule({
       providers: [
         OtpService,
         {

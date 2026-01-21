@@ -23,7 +23,7 @@ export class RegistrationTokenService {
     return `Auth:Registration:${jti}`;
   }
 
-  async issue(email: string): Promise<string> {
+  async issue(email: string) {
     const jti = crypto.randomUUID();
 
     await this.cache.set(
@@ -45,7 +45,7 @@ export class RegistrationTokenService {
     );
   }
 
-  async consume(token: string): Promise<string> {
+  async consume(token: string) {
     let payload: { jti: string; email: string; scope: string } = {
       jti: '',
       email: '',

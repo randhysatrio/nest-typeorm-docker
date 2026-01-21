@@ -12,7 +12,7 @@ describe('AccessTokenService', () => {
   let configService: ConfigService;
 
   beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
+    const module = await Test.createTestingModule({
       providers: [
         AccessTokenService,
         {
