@@ -25,7 +25,7 @@ export class OtpService {
     return `Auth:Otp:${email}`;
   }
 
-  async issue(email: string): Promise<string> {
+  async issue(email: string) {
     const code = this.generateCode();
 
     await this.cache.set(
@@ -37,7 +37,7 @@ export class OtpService {
     return code; // send via email/SMS elsewhere
   }
 
-  async verify(email: string, code: string): Promise<void> {
+  async verify(email: string, code: string) {
     const stored = await this.cache.get<string>(this.key(email));
 
     if (stored !== code) {
