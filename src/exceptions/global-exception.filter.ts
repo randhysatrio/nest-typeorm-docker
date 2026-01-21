@@ -36,6 +36,8 @@ export class GlobalExceptionFiler implements ExceptionFilter {
     this.logger.error(`${message} from URL: ${request.url}`);
     this.logger.debug(exception);
 
+    // Log error to monitoring tools here
+
     httpAdapter.reply(
       ctx.getResponse(),
       createApiResponse(
