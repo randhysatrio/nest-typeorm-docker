@@ -65,7 +65,7 @@ export class UserService {
       isVerified: true,
     });
 
-    return this.repo.save(user);
+    return await this.repo.save(user);
   }
 
   async validatePassword(email: string, password: string) {
