@@ -72,7 +72,7 @@ export class AuthService {
     const email =
       await this.registrationTokenService.consume(registrationToken);
 
-    await this.userService.assertEmailExist(phone);
+    await this.userService.assertPhoneExist(phone);
 
     const createdUser = await this.userService.create({
       name,

@@ -111,7 +111,7 @@ describe('RegistrationTokenService', () => {
     );
   });
 
-  it(`should throws error if scope is not 'registration'`, async () => {
+  it(`should throw an error if scope is not 'registration'`, async () => {
     jwt.verify.mockReturnValue({
       jti,
       email,
