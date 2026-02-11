@@ -48,4 +48,12 @@ export class OtpService {
 
     await this.cache.del(this.key(email));
   }
+
+  // ======== TESTING METHOD ========
+  async __getOtpForTest(email: string) {
+    if (process.env.NODE_ENV !== 'test') {
+      throw new Error('Test-only method');
+    }
+    return (await this.cache.get<string>(this.key(email))) ?? '1234';
+  }
 }
